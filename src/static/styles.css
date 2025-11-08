@@ -142,3 +142,74 @@ footer {
   padding: 20px;
   color: #666;
 }
+
+/* Participants list styling inside activity card */
+.participants-section {
+  margin-top: 12px;
+}
+
+.participants-list {
+  list-style: none; /* hide bullet points */
+  padding-left: 0;
+  margin-top: 8px;
+  display: block;
+}
+
+.participant-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: background-color 0.15s;
+  margin-bottom: 6px;
+  background-color: rgba(26, 35, 126, 0.03);
+}
+
+.participant-item:hover {
+  background-color: rgba(26, 35, 126, 0.06);
+}
+
+.participant-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3949ab 0%, #1a237e 100%);
+  color: white;
+  font-weight: 700;
+  font-size: 0.85rem;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+}
+
+.participant-email {
+  font-size: 0.95rem;
+  color: #333;
+  word-break: break-word;
+}
+
+/* delete/unregister button */
+.participant-delete {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: #c62828;
+  font-size: 1.15rem;
+  cursor: pointer;
+  padding: 4px 6px;
+  line-height: 1;
+  border-radius: 4px;
+}
+.participant-delete:hover {
+  background: rgba(198,40,40,0.06);
+}
+
+/* subtle style for "no participants" list item */
+.participant-none {
+  color: #666;
+  font-style: italic;
+  background: transparent;
+  padding: 4px 0;
+}
