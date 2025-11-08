@@ -66,6 +66,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
             li.appendChild(avatar);
             li.appendChild(emailSpan);
+            // delete/unregister button
+            const deleteBtn = document.createElement("button");
+            deleteBtn.className = "participant-delete";
+            deleteBtn.type = "button";
+            deleteBtn.title = `Unregister ${participant}`;
+            deleteBtn.innerHTML = "&times;"; // simple X icon
+
+            deleteBtn.addEventListener("click", async (e) => {
+              e.stopPropagation();
+              const confirmed = window.confirm(`Unregister ${participant} from ${name}?`);
+              if (!confirmed) return;
+              try {
+                const resp = await fetch(
+                  `/activities/${encodeURIComponent(name)}/unregister?email=${encodeURIComponent(participant)}`,
+                  { method: "POST" }
+                );
+                const data = await resp.json();
+                if (resp.ok) {
+                  // show success briefly
+                  messageDiv.textContent = data.message;
+                  messageDiv.className = "message success";
+                  messageDiv.classList.remove("hidden");
+                  // refresh activities to update UI
+                  fetchActivities();
+                } else {
+                  messageDiv.textContent = data.detail || "Failed to unregister";
+                  messageDiv.className = "message error";
+                  messageDiv.classList.remove("hidden");
+                }
+                setTimeout(() => messageDiv.classList.add("hidden"), 4000);
+              } catch (err) {
+                console.error("Error unregistering:", err);
+                messageDiv.textContent = "Failed to unregister. Please try again.";
+                messageDiv.className = "message error";
+                messageDiv.classList.remove("hidden");
+              }
+            });
+
+            li.appendChild(deleteBtn);
             ul.appendChild(li);
           });
         } else {
